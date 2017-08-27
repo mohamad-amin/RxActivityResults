@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.mohamadamin.rxactivityresults.sample"
+        minSdkVersion 14
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+}
+
+dependencies {
+
+    compile project(':rxactivityresults')
+
+    compile rootProject.ext.appCompat
+    compile rootProject.ext.rxBinding
+
+    testCompile rootProject.ext.junit
+    testCompile rootProject.ext.mockito
+
+}

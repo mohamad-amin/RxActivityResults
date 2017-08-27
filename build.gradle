@@ -1,0 +1,72 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+
+    minSdkVersion = 11
+    compileSdkVersion = 26
+    targetSdkVersion = compileSdkVersion
+    buildToolsVersion = '26.0.1'
+
+    rxJava = 'io.reactivex.rxjava2:rxjava:2.1.0'
+    rxAndroid = 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    rxBinding = 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+
+    supportLibraryVersion = '26.+'
+    appCompat = "com.android.support:appcompat-v7:$supportLibraryVersion"
+    supportAnnotations = "com.android.support:support-annotations:$supportLibraryVersion"
+    junit = 'junit:junit:4.12'
+    mockito = 'org.mockito:mockito-core:1.10.19'
+
+    robolectricVersion = '3.1.4'
+    robolectric = "org.robolectric:robolectric:$robolectricVersion"
+    robolectricShadowsSupport = "org.robolectric:shadows-support-v4:$robolectricVersion"
+    // Workaround for https://github.com/robolectric/robolectric/issues/1932
+    khronosOpenGLApi = "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+
+    bintrayRepo = 'mohamad-amin'
+    bintrayName = 'RxActivityResults'
+
+    publishedGroupId = 'com.mohamadamin.rxactivityresults'
+    artifact = 'rxactivityresults'
+    libraryName = 'RxActivityResults'
+    libraryVersion = '0.1'
+    libraryVersionCode = 1
+
+    libraryDescription = 'A wrapper for Android Activity\'s onActivityResult'
+
+    siteUrl = 'https://github.com/mohamad-amin/RxActivityResults'
+    gitUrl = 'https://github.com/mohamad-amin/RxActivityResults.git'
+
+    developerId = 'mohamad-amin'
+    developerName = 'Mohamad Amin Mohamadi'
+    developerEmail = 'mohammadi.mohamadamin@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+}
