@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RxActivityResults</string>
+    <string name="title_activity_login">Login</string>
+    <string name="email_address">Email Address</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="test_login_activity">Test Login Activity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="all_fields_required">All fields are required!</string>
 </resources>

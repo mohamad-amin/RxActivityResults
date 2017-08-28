@@ -1,4 +1,4 @@
-package com.mohamadamin.rxactivityresults;
+package com.mohamadamin.rxactivityresults.sample;
 
 import org.junit.Test;
 
