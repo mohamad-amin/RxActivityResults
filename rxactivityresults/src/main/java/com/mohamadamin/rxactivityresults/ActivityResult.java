@@ -40,7 +40,7 @@ public class ActivityResult {
 
     @Override
     public String toString() {
-        return "ActivityResult{ ResultCode = " +
+        return "ActivityResult { ResultCode = " +
                 resultCode + ", Data = " + data + " }";
     }
 
