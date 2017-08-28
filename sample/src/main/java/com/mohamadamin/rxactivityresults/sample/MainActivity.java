@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.mohamadamin.rxactivityresults.ActivityResult;
 import com.mohamadamin.rxactivityresults.RxActivityResults;
-
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -78,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 .flatMap(ignoredObject -> rxActivityResults.start(getPickImageIntent()))
                 .observeOn(Schedulers.computation())
                 .filter(activityResult -> activityResult.getResultCode() == RESULT_OK)
-                // 1 second delay to ensure that the uri is ready to use
-                .delay(1, TimeUnit.SECONDS)
                 .map(ActivityResult::getData)
                 .filter(intent -> intent.getData() != null)
                 .map(Intent::getData)
