@@ -30,11 +30,13 @@ public class RxActivityResultsTest {
     @Before
     public void setUp() {
 
-        ActivityController<Activity> activityController = Robolectric.buildActivity(Activity.class);
+        ActivityController<Activity> activityController =
+                Robolectric.buildActivity(Activity.class);
         activity = spy(activityController.setup().get());
 
         rxActivityResults = spy(new RxActivityResults(activity));
-        rxActivityResults.mRxActivityResultsFragment = spy(rxActivityResults.mRxActivityResultsFragment);
+        rxActivityResults.mRxActivityResultsFragment =
+                spy(rxActivityResults.mRxActivityResultsFragment);
 
         when(rxActivityResults.mRxActivityResultsFragment.getActivity())
                 .thenReturn(activity);
