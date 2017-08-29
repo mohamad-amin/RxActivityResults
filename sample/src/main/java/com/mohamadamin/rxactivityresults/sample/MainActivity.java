@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R    .layout.activity_main);
+        setContentView(R.layout.activity_main);
         initializeViews();
 
         rxActivityResults = new RxActivityResults(this);
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private void setUpLogin() {
 
         Disposable disposable = RxView.clicks(loginButton)
-                .flatMap(ignoredObject -> rxActivityResults.start(getLoginIntent()))
-                .filter(activityResult -> activityResult.getResultCode() == RESULT_OK)
+                .compose(rxActivityResults.composer(getLoginIntent()))
+                .filter(ActivityResult::isOk)
                 .map(ActivityResult::getData)
                 .subscribe(intent -> {
 
@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
     private void setUpImagePicker() {
 
         Disposable disposable = RxView.clicks(pickImageFab)
-                .flatMap(ignoredObject -> rxActivityResults.start(getPickImageIntent()))
+                .compose(rxActivityResults.composer(getPickImageIntent()))
                 .observeOn(Schedulers.computation())
-                .filter(activityResult -> activityResult.getResultCode() == RESULT_OK)
+                .filter(ActivityResult::isOk)
                 .map(ActivityResult::getData)
                 .filter(intent -> intent.getData() != null)
                 .map(Intent::getData)
