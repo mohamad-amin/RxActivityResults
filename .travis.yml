@@ -22,9 +22,10 @@ before_install:
 
 script:
   — ./gradlew build jacocoTestReport
+  - ./gradlew connectedCheck
 
 after_success:
-  — bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email: false
