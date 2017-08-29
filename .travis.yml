@@ -2,18 +2,10 @@ language: android
 
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-     - tools
-     - platform-tools
-
-    # The BuildTools version used by your project
+    - tools
+    - platform-tools
     - build-tools-26.0.1
-
-    # The SDK version used to compile your project
     - android-26
-
-    # Additional components
     - extra-android-m2repository
 
 jdk:
@@ -25,7 +17,8 @@ cache:
     - $HOME/.gradle
 
 before_install:
-    - chmod +x gradlew
+    - sudo apt-get update -qq
+    - sudo apt-get install oracle-java8-installer
 
 notifications:
-  email: true
+  email: false
