@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private void setUpLogin() {
 
         Disposable disposable = RxView.clicks(loginButton)
-                .doOnNext(o -> Log.d("TAGS", "Hello"))
                 .flatMap(ignoredObject -> rxActivityResults.start(getLoginIntent()))
                 .filter(activityResult -> activityResult.getResultCode() == RESULT_OK)
                 .map(ActivityResult::getData)
                 .subscribe(intent -> {
 
-                    String lastName = intent.getStringExtra(LoginActivity.LAST_NAME);
                     String firstName = intent.getStringExtra(LoginActivity.FIRST_NAME);
+                    String lastName = intent.getStringExtra(LoginActivity.LAST_NAME);
                     String emailAddress = intent.getStringExtra(LoginActivity.EMAIL_ADDRESS);
 
                     String result = getString(R.string.first_name) + ": " + firstName + "\n"

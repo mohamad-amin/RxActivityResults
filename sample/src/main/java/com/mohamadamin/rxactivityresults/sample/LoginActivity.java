@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         emailAddressEditText = (EditText) findViewById(R.id.input_email);
-        lastNameEditText = (EditText) findViewById(R.id.input_first_name);
-        firstNameEditText = (EditText) findViewById(R.id.input_last_name);
+        lastNameEditText = (EditText) findViewById(R.id.input_last_name);
+        firstNameEditText = (EditText) findViewById(R.id.input_first_name);
 
     }
 
