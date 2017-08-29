@@ -17,6 +17,7 @@ If you have any issues or need more features, you can submit an issue in the
       * [Reactive Results](#reactive-results)
       * [Chain Transformation](#chain-transformation)
   * [Demo](#demo)
+  * [Credits](#credits)
   * [Licence](#licence)
   
   
@@ -105,7 +106,7 @@ disposables.add(disposable);
 You can see a full demo of the library in the [sample](https://github.com/mohamad-amin/RxActivityResults/tree/master/sample) module.
 
 ## Credits
-This library was inspired by [RxPermissions](https://github.com/tbruyelle/RxPermissions), so great thanks to [tbruyelle](https://github.com/tbruyelle) for his great contribution.
+This library was inspired by [RxPermissions](https://github.com/tbruyelle/RxPermissions), so great thanks to [@tbruyelle](https://github.com/tbruyelle) for his great contribution.
 
 ## Licence
 ```
