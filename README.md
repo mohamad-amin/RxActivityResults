@@ -1,4 +1,4 @@
-![Travis-ci](https://api.travis-ci.org/mohamad-amin/rxactivityresults.svg)
+![Travis-ci](https://api.travis-ci.org/mohamad-amin/RxActivityResults.svg)
 
 # RxActivityResults
 This library uses the power of **RxJava** to wrap an `Observable` android `Activity#onActivityResult()` method 
