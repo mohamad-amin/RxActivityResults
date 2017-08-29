@@ -1,3 +1,5 @@
+![Travis-ci](https://api.travis-ci.org/mohamad-amin/rxactivityresults.svg)
+
 # RxActivityResults
 This library uses the power of **RxJava** to wrap an `Observable` android `Activity#onActivityResult()` method 
 so you can easily request something from other activities and have the result right there in your 
