@@ -17,7 +17,9 @@ If you have any issues or need more features, you can submit an issue in the
       * [Reactive Results](#reactive-results)
       * [Chain Transformation](#chain-transformation)
   * [Demo](#demo)
+  * [Credits](#credits)
   * [Licence](#licence)
+  
   
 ![Demo](https://github.com/mohamad-amin/RxActivityResults/blob/master/art/demo.gif)
 
@@ -30,15 +32,83 @@ dependencies {
 ```
 
 ## Usage
+First you need to create an instance of `RxActivityResults` in your `Activity`:
+```java
+RxActivityResults rxActivityResults;
 
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    ...
+    rxActivityResults = new RxActivityResults(this);
+    ...
+}
+```
+Then you can use this instance to start an activity for result and have it's result in your observer like this:
+```java
+Intent intent = new Intent(this, LoginActivity.class);
+rxActivityResults.start(loginIntent)
+                .subscribe(activityResult -> {
+                    // Checking if the result's resultCode is Activity.RESULT_OK
+                    if (activityResult.isOk()) {
+                        Intent responseData = activityResult.getData();
+                        // Do some other things with the response data
+                   }
+                });
+      
+```
 #### Reactive Results
+You can use `RxActivityResults#composer(Intent intent)` method to have an `ObservableTransformer` to chain your observables together and avoid from breaking the reactive chain:
 
+(**Note**: we used [RxBinding](https://github.com/JakeWharton/RxBinding) library to turn view clicks into an observable)
+```java
+Disposable disposable = RxView.clicks(loginButton)
+        // Fire an intent when the user clicks on the button
+        .compose(rxActivityResults.composer(getLoginIntent()))
+        // Filter the activity results which their resultCode is Activity.RESULT_OK
+        .filter(activityResult -> activityResult.isOk())
+        // Extract the data intent of the activity result
+        .map(ActivityResult::getData)
+        .subscribe(intent -> {
+
+            String firstName = intent.getStringExtra(LoginActivity.FIRST_NAME);
+            String lastName = intent.getStringExtra(LoginActivity.LAST_NAME);
+            String emailAddress = intent.getStringExtra(LoginActivity.EMAIL_ADDRESS);
+
+            String result = getString(R.string.first_name) + ": " + firstName + "\n"
+                    + getString(R.string.last_name) + ": " + lastName + "\n"
+                    + getString(R.string.email_address) + ": " + emailAddress + "\n";
+
+            loginInfoText.setText(result);
+
+        });
+
+disposables.add(disposable);
+```
 #### Chain Transformation
+You can use `RxActivityResults#ensureOkResult(Intent intent)` method to have an `ObservableTransformer` to chain your observables together and avoid from breaking the reactive chain:
+```java
+Disposable disposable = someAnotherChainOfObservables
+        // Fire an intent when the user clicks on the button
+        .compose(rxActivityResults.ensureOkResult(getIntent()))
+        .switchMap(okResult -> {
+            if (okResult) {
+                return someAnotherObservable();
+            } else {
+                return Observable.error(new RuntimeException("Intent didn't return RESULT_OK"));
+            }
+        })
+        .flatMap(...)
+        ...
 
+disposables.add(disposable);
+```
 ## Demo
 You can see a full demo of the library in the [sample](https://github.com/mohamad-amin/RxActivityResults/tree/master/sample) module.
 
-## License
+## Credits
+This library was inspired by [RxPermissions](https://github.com/tbruyelle/RxPermissions), so great thanks to [@tbruyelle](https://github.com/tbruyelle) for his great contribution.
+
+## Licence
 ```
 Copyright 2017 Mohamad Amin Mohamadi
 
