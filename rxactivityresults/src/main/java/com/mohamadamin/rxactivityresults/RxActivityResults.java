@@ -3,6 +3,7 @@ package com.mohamadamin.rxactivityresults;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.annotation.VisibleForTesting;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -59,7 +60,7 @@ public class RxActivityResults {
                 return request(upstream, intent).map(new Function<ActivityResult, Boolean>() {
                     @Override
                     public Boolean apply(@NonNull ActivityResult activityResult) throws Exception {
-                        return activityResult.getResultCode() == Activity.RESULT_OK;
+                        return activityResult.isOk();
                     }
                 });
             }
@@ -95,6 +96,12 @@ public class RxActivityResults {
 
     public void setLogging(boolean logging) {
         mRxActivityResultsFragment.setLogging(logging);
+    }
+
+    @VisibleForTesting
+    void onActivityResult(int resultCode, Intent intent) {
+        mRxActivityResultsFragment.onActivityResult(
+                RxActivityResultsFragment.ACTIVITY_RESULT_REQUEST_CODE, resultCode, intent);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mohamadamin.rxactivityresults;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public class RxActivityResultsFragment extends Fragment {
 
-    private static final int ACTIVITY_RESULT_REQUEST_CODE = 1692;
+    static final int ACTIVITY_RESULT_REQUEST_CODE = 1692;
     private PublishSubject<ActivityResult> activityResults;
     private boolean logging;
 
@@ -40,7 +41,7 @@ public class RxActivityResultsFragment extends Fragment {
                         " invoked but didn't find the corresponding permission request.");
                 return;
             }
-            activityResults.onNext(new ActivityResult(resultCode, data));
+            activityResults.onNext(new ActivityResult(Activity.RESULT_OK, resultCode, data));
             log("onActivityResult: onNext");
             activityResults.onComplete();
             activityResults = null;

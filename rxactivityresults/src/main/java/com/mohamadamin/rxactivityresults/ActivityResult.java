@@ -10,10 +10,12 @@ public class ActivityResult {
 
     private final Intent data;
     private final int resultCode;
+    private final int okResultCode;
 
-    public ActivityResult(int resultCode, Intent data) {
+    public ActivityResult(int okResultCode, int resultCode, Intent data) {
         this.data = data;
         this.resultCode = resultCode;
+        this.okResultCode = okResultCode;
     }
 
     public Intent getData() {
@@ -22,6 +24,10 @@ public class ActivityResult {
 
     public int getResultCode() {
         return resultCode;
+    }
+
+    public boolean isOk() {
+        return resultCode == okResultCode;
     }
 
     @Override

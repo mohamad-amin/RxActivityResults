@@ -1,5 +1,6 @@
 package com.mohamadamin.rxactivityresults;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import org.junit.Before;
@@ -27,21 +28,32 @@ public class ActivityResultTest {
 
     @Before
     public void setUp() {
-        activityResult = new ActivityResult(resultCode, intent);
+        activityResult = new ActivityResult(Activity.RESULT_OK, resultCode, intent);
     }
 
     @Test
     public void equalsTrue() throws Exception {
-        ActivityResult testResult = new ActivityResult(resultCode, intent);
+        ActivityResult testResult = new ActivityResult(Activity.RESULT_OK, resultCode, intent);
         assertTrue(activityResult.equals(testResult));
         assertTrue(activityResult.equals(activityResult));
     }
 
     @Test
     public void equalsFalse() throws Exception {
-        ActivityResult testResult = new ActivityResult(resultCode - 1, intent);
+        ActivityResult testResult = new ActivityResult(Activity.RESULT_OK, resultCode - 1, intent);
         assertFalse(activityResult.equals(testResult));
         assertFalse(activityResult.equals(intent));
+    }
+
+    @Test
+    public void isOkTest() throws Exception {
+
+        ActivityResult faultyResult = new ActivityResult(Activity.RESULT_OK, resultCode - 1, intent);
+        assertFalse(faultyResult.isOk());
+
+        ActivityResult okResult = new ActivityResult(Activity.RESULT_OK, Activity.RESULT_OK, intent);
+        assertTrue(okResult.isOk());
+
     }
 
     @Test
