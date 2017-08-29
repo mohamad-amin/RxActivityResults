@@ -85,7 +85,7 @@ disposables.add(disposable);
 ```
 #### Chain Transformation
 You can use `RxActivityResults#ensureOkResult(Intent intent)` method to have an `ObservableTransformer` to chain your observables together and avoid from breaking the reactive chain:
-```
+```java
 Disposable disposable = someAnotherChainOfObservables
         // Fire an intent when the user clicks on the button
         .compose(rxActivityResults.ensureOkResult(getIntent()))
