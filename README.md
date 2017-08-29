@@ -104,6 +104,9 @@ disposables.add(disposable);
 ## Demo
 You can see a full demo of the library in the [sample](https://github.com/mohamad-amin/RxActivityResults/tree/master/sample) module.
 
+## Credits
+This library was inspired by [RxPermissions](https://github.com/tbruyelle/RxPermissions), so great thanks to [tbruyelle](https://github.com/tbruyelle) for his great contribution.
+
 ## Licence
 ```
 Copyright 2017 Mohamad Amin Mohamadi
