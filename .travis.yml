@@ -21,7 +21,7 @@ before_install:
     - sudo apt-get install oracle-java8-installer
 
 script:
-  — ./gradlew build jacocoTestReport
+  - ./gradlew build jacocoTestReport
   - ./gradlew connectedCheck
 
 after_success:
