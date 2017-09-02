@@ -123,17 +123,15 @@ publishing {
 bintray {
     user = bintrayUser
     key = bintrayKey
-    publications = ['mavenCustom']
     publish = true
+    configurations = ['archives']
     pkg {
-        repo = 'rxactivityresults'
+        repo = 'maven'
         name = project.name
         desc = DESC
-        userOrg = "mohamad-amin"
         licenses = ['Apache-2.0']
         websiteUrl = 'https://github.com/mohamad-amin/RxActivityResults'
         vcsUrl = 'https://github.com/mohamad-amin/RxActivityResults.git'
-        licenses = ['Apache-2.0']
         issueTrackerUrl = 'https://github.com/mohamad-amin/RxActivityResults/issues'
         labels = ['android']
         publicDownloadNumbers = true
