@@ -124,7 +124,7 @@ bintray {
     user = bintrayUser
     key = bintrayKey
     publish = true
-    configurations = ['archives']
+    publications = ['mavenCustom']
     pkg {
         repo = 'maven'
         name = project.name
