@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'jacoco-android'
 apply from: "$rootDir/gradle/jacoco.gradle"
+//apply from: "$rootDir/gradle/jfrog-uploader.gradle"
 
 android {
 
