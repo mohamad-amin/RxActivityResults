@@ -1,6 +1,5 @@
 import java.text.SimpleDateFormat
 
-apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: "com.jfrog.artifactory"
 apply plugin: 'maven-publish'
@@ -65,47 +64,46 @@ def pomConfig = {
     }
 }
 
-jar {
-    manifest {
-        attributes(
-                'Built-By': 'Mohamad Amin Mohamadi',
-                'Created-By': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString(),
-                'Build-Date': buildDate,
-                'Build-Time': buildTime,
-                'Build-Revision': versioning.info.commit,
-                'Specification-Title': project.name,
-                'Specification-Version': project.version,
-                'Specification-Vendor': 'RxActivityResults',
-                'Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'Implementation-Vendor': 'RxActivityResults'
-        )
-    }
+//jar {
+//    manifest {
+//        attributes(
+//                'Built-By': 'Mohamad Amin Mohamadi',
+//                'Created-By': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString(),
+//                'Build-Date': buildDate,
+//                'Build-Time': buildTime,
+//                'Build-Revision': versioning.info.commit,
+//                'Specification-Title': project.name,
+//                'Specification-Version': project.version,
+//                'Specification-Vendor': 'RxActivityResults',
+//                'Implementation-Title': project.name,
+//                'Implementation-Version': project.version,
+//                'Implementation-Vendor': 'RxActivityResults'
+//        )
+//    }
+//    metaInf {
+//        from rootProject.file('.')
+//        include 'LICENSE'
+//    }
+//}
 
-    metaInf {
-        from rootProject.file('.')
-        include 'LICENSE'
-    }
-}
+//task sourcesJar(type: Jar, dependsOn: classes) {
+//    classifier = 'sources'
+//    from sourceSets.main.getAllJava()
+//}
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.getAllJava()
-}
-
-artifacts {
-    archives sourcesJar
-}
+//artifacts {
+//    archives sourcesJar
+//}
 
 artifactoryPublish {
-    dependsOn sourcesJar
+//    dependsOn sourcesJar
 }
 
 publishing {
     publications {
         mavenCustom(MavenPublication) {
-            from components.java
-            artifact sourcesJar
+//            from components.java
+//            artifact sourcesJar
 
             pom.withXml {
                 // all dependencies should use the default scope (compile) but
