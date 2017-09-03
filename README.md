@@ -1,9 +1,9 @@
 [![Travis-ci](https://api.travis-ci.org/mohamad-amin/RxActivityResults.svg)](https://codecov.io/gh/mohamad-amin/RxActivityResults) 
 [![CodeCov](https://codecov.io/gh/mohamad-amin/RxActivityResults/branch/master/graph/badge.svg)](https://codecov.io/gh/mohamad-amin/RxActivityResults)
-[![Bintray](https://img.shields.io/bintray/v/mohamad-amin/maven/kpreferences.svg?maxAge=2592000)](https://bintray.com/mohamad-amin/maven/kpreferences) 
+[![Bintray](https://img.shields.io/bintray/v/mohamad-amin/maven/rxactivityresults.svg?maxAge=2592000)](https://bintray.com/mohamad-amin/maven/rxactivityresults) 
 ![Min API](https://img.shields.io/badge/API-11+-brightgreen.svg) 
 [![License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0) 
-[![Methods Count](https://img.shields.io/badge/Methods%20count-core:%2066%20%7C%20deps:%2010203-e91e63.svg)](http://www.methodscount.com/?lib=com.mohamadamin.rxactivityresults%rxactivityresults%3A0.1)
+[![Methods Count](https://img.shields.io/badge/Methods%20count-core:%2066%20%7C%20deps:%2010203-e91e63.svg)](http://www.methodscount.com/?lib=com.mohamadamin.rxactivityresults%3Arxactivityresults%3A0.1)
 
 # RxActivityResults
 This library uses the power of **RxJava** to wrap an `Observable` android `Activity#onActivityResult()` method 
