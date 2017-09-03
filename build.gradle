@@ -10,6 +10,7 @@ buildscript {
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
         classpath 'net.nemerosa:versioning:2.0.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.4.5'
     }
 }
@@ -54,7 +55,7 @@ ext {
     // Workaround for https://github.com/robolectric/robolectric/issues/1932
     khronosOpenGLApi = "org.khronos:opengl-api:gl1.1-android-2.1_r1"
 
-    bintrayRepo = 'mohamad-amin'
+    bintrayRepo = 'maven'
     bintrayName = 'RxActivityResults'
 
     publishedGroupId = 'com.mohamadamin.rxactivityresults'

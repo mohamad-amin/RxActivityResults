@@ -1,10 +1,12 @@
 import java.text.SimpleDateFormat
 
+apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: "com.jfrog.artifactory"
-apply plugin: 'maven-publish'
 apply plugin: 'net.nemerosa.versioning'
 
+group = GROUP
+version = VERSION_NAME
 Date buildTimeAndDate = new Date()
 def buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
 def buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
@@ -24,19 +26,19 @@ if (travisSlug) {
 }
 
 def pomConfig = {
-    name project.name
-    description DESC
-    url 'https://github.com/mohamad-amin/RxActivityResults'
-    inceptionYear '2017'
+    name POM_PROJECT_NAME
+    description POM_DESCRIPTION
+    url POM_URL
+    inceptionYear POM_INTERCEPTION_YEAR
     licenses {
         license([:]) {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            distribution 'repo'
+            name POM_LICENCE_NAME
+            url POM_LICENCE_URL
+            distribution POM_LICENCE_DIST
         }
     }
     scm {
-        url 'https://github.com/mohamad-amin/RxActivityResults'
+        url POM_SCM_URL
     }
     developers {
         [
@@ -64,48 +66,31 @@ def pomConfig = {
     }
 }
 
-//jar {
-//    manifest {
-//        attributes(
-//                'Built-By': 'Mohamad Amin Mohamadi',
-//                'Created-By': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString(),
-//                'Build-Date': buildDate,
-//                'Build-Time': buildTime,
-//                'Build-Revision': versioning.info.commit,
-//                'Specification-Title': project.name,
-//                'Specification-Version': project.version,
-//                'Specification-Vendor': 'RxActivityResults',
-//                'Implementation-Title': project.name,
-//                'Implementation-Version': project.version,
-//                'Implementation-Vendor': 'RxActivityResults'
-//        )
-//    }
-//    metaInf {
-//        from rootProject.file('.')
-//        include 'LICENSE'
-//    }
-//}
-
-//task sourcesJar(type: Jar, dependsOn: classes) {
-//    classifier = 'sources'
-//    from sourceSets.main.getAllJava()
-//}
-
-//artifacts {
-//    archives sourcesJar
-//}
-
-artifactoryPublish {
-//    dependsOn sourcesJar
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "source"
 }
 
 publishing {
     publications {
-        mavenCustom(MavenPublication) {
-//            from components.java
-//            artifact sourcesJar
+        Production(MavenPublication) {
 
+            groupId 'com.mohamadamin.rxactivityresults'
+            artifactId 'rxactivityresults'
+            version '0.1'
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/rxactivityresults-release.aar")
+
+            //The publication doesn't know about our dependencies, so we have to manually add them to the pom
             pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
                 // all dependencies should use the default scope (compile) but
                 // Gradle insists in using runtime as default
                 asNode().dependencies.dependency.each { dep ->
@@ -119,23 +104,24 @@ publishing {
     }
 }
 
-////////release
 bintray {
-    user = bintrayUser
-    key = bintrayKey
+    // Get Bintray credential from environment variable
+    user = bintrayUser // Get bintray User
+    key = bintrayKey // Get bintray Secret Key
+    publications = ['Production']
     publish = true
-    publications = ['mavenCustom']
     pkg {
         repo = 'maven'
-        name = project.name
-        desc = DESC
-        licenses = ['Apache-2.0']
-        websiteUrl = 'https://github.com/mohamad-amin/RxActivityResults'
-        vcsUrl = 'https://github.com/mohamad-amin/RxActivityResults.git'
-        issueTrackerUrl = 'https://github.com/mohamad-amin/RxActivityResults/issues'
+        name = 'rxactivityresults'
+        userOrg = POM_DEVELOPER_ID
+        licenses = [POM_LICENCE]
+        desc = POM_DESCRIPTION
+        websiteUrl = POM_URL
+        vcsUrl = POM_URL + '.git'
+        issueTrackerUrl = POM_URL + 'issues/'
         labels = ['android']
         publicDownloadNumbers = true
-        githubRepo = 'mohamad-amin/RxActivityResults'
+        githubRepo = POM_DEVELOPER_ID + '/' + POM_ARTIFACT_ID
         githubReleaseNotesFile = 'README.md'
         version {
             name = VERSION_NAME
@@ -143,37 +129,4 @@ bintray {
             released = new Date()
         }
     }
-}
-
-////////snapshots
-
-artifactory {
-    contextUrl = 'https://oss.jfrog.org'
-
-    publish {
-        repository {
-            repoKey = 'oss-snapshot-local'
-            username = bintrayUser
-            password = bintrayKey
-        }
-        defaults {
-            publications('mavenCustom')
-            publishArtifacts = true
-
-        }
-    }
-    resolve {
-        repoKey = 'jcenter'
-    }
-}
-
-def publishTask
-if (VERSION_NAME.endsWith("SNAPSHOT")) {
-    publishTask = tasks.artifactoryPublish
-} else {
-    publishTask = tasks.bintrayUpload
-}
-
-task publishFromCI(dependsOn: publishTask) {
-
 }
